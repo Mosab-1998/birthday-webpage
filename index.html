@@ -148,6 +148,35 @@
         height: auto;
       }
     }
+    /* Countdown Timer Styles */
+.countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.time-box {
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  min-width: 100px;
+}
+
+.time-box span {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ff4081;
+}
+
+.time-box small {
+  display: block;
+  margin-top: 5px;
+  font-size: 0.9rem;
+  color: #666;
+}
   </style>
 </head>
 <body>
@@ -159,6 +188,30 @@
       <a href="#" class="btn-wish"><i class="fas fa-gift"></i> Have a Wonderful Day!</a>
     </div>
   </section>
+  <!-- Countdown Timer Section -->
+<section class="section" id="countdown">
+  <div class="container">
+    <h2><i class="fas fa-clock"></i> Countdown to 7albey's Birthday!</h2>
+    <div class="countdown-timer">
+      <div class="time-box">
+        <span id="days">0</span>
+        <small>Days</small>
+      </div>
+      <div class="time-box">
+        <span id="hours">0</span>
+        <small>Hours</small>
+      </div>
+      <div class="time-box">
+        <span id="minutes">0</span>
+        <small>Minutes</small>
+      </div>
+      <div class="time-box">
+        <span id="seconds">0</span>
+        <small>Seconds</small>
+      </div>
+    </div>
+  </div>
+</section>
 
   <!-- Memories Section -->
   <section class="section">
@@ -175,9 +228,33 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <p><i class="fas fa-heart icon-heart"></i> Made with ❤️ by your best friend</p>
+    <p><i class="fas fa-heart icon-heart"></i> Made with ❤️ by mosab</p>
     <p>Happy Birthday Again! 🎂</p>
   </footer>
+  <script>
+  // Set the target date for the countdown (November 5, 2025)
+  const birthday = new Date("November 5, 2025 00:00:00").getTime();
+
+  const countdownFunction = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = birthday - now;
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerHTML = days;
+    document.getElementById("hours").innerHTML = hours;
+    document.getElementById("minutes").innerHTML = minutes;
+    document.getElementById("seconds").innerHTML = seconds;
+
+    if (distance < 0) {
+      clearInterval(countdownFunction);
+      document.querySelector("#countdown .countdown-timer").innerHTML = "<h3>🎉 Happy Birthday! 🎉</h3>";
+    }
+  }, 1000);
+</script>
 
 </body>
 </html>
